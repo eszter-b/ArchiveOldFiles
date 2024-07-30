@@ -1,0 +1,32 @@
+name: Archive files olver than 30 days
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  create-vm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+          
+      - name: Set up AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+          
+      - name: Configure AWS credentials
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region eu-central-1
+          
+      - name: Run archiving script
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          BASE_DIR: ${{ secrets.BASE_DIR }}
+          REMOTE_DIR: ${{ secrets.REMOTE_DIR }}
+        run: bash archive_files.sh
