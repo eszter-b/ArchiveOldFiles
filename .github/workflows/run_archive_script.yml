@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  create-vm:
+  archive-and-move-files:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
