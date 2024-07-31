@@ -18,7 +18,7 @@ The script calculates the age of the files based on the name of their comprising
 ## Workflow
 Runs on ubuntu-latest.
 ### Schedule:
-* Schedules the run to 00:00 UTC every day. For testing the workflow can be triggered manually.
+* Schedules the run to 00:00 UTC every day.
 ### Set up AWS CLI:
 * Installs AWS CLI
 ### Configure AWS credentials:
